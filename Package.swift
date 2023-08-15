@@ -54,7 +54,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-system", .upToNextMajor(from: "1.0.0")),
-        .package(url: "https://github.com/CharlesJS/CSProgress", .upToNextMajor(from: "1.1.2"))
+        .package(url: "https://github.com/gregcotten/CSProgress", .upToNextMajor(from: "0.0.1"))
     ],
     targets: targets
 )

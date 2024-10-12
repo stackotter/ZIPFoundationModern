@@ -368,8 +368,8 @@ extension Archive.EndOfCentralDirectoryRecord {
 
 extension Data {
     var uint32: UInt32 {
-        UInt32(littleEndian: self[0 ..< 4].withUnsafeBytes { bytes in
-            bytes.load(as: UInt32.self)
+        UInt32(littleEndian: withUnsafeBytes {
+            $0.loadUnaligned(as: UInt32.self)
         })
     }
 }

@@ -23,8 +23,7 @@ extension Data {
     }
 
     func scanValue<T>(start: Int) -> T {
-        let subdata = subdata(in: start ..< start + MemoryLayout<T>.size)
-        return subdata.withUnsafeBytes { $0.load(as: T.self) }
+        withUnsafeBytes { $0.loadUnaligned(fromByteOffset: start, as: T.self) }
     }
 
     static func readStruct<T>(from file: ArchiveHandle, at offset: UInt64)

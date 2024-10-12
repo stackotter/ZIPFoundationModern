@@ -9,32 +9,30 @@ on:
 jobs:
   Xcode:
     runs-on: macos-latest
-    env:
-      DEVELOPER_DIR: /Applications/Xcode.app
     steps:
-      - uses: actions/checkout@v3
-      - run: swift -version
+      - uses: actions/checkout@v4
+      - name: Install Swift
+        uses: SwiftyLab/setup-swift@latest
+        with:
+          swift-version: "6.0.1"
       - run: swift test -c release -Xswiftc -enable-testing
 
   Linux:
-    strategy:
-      matrix:
-        tag: ['5.9.1']
     runs-on: ubuntu-latest
-    container:
-      image: swift:${{ matrix.tag }}
     steps:
       - uses: actions/checkout@v4
+      - name: Install Swift
+        uses: SwiftyLab/setup-swift@latest
+        with:
+          swift-version: "6.0.1"
       - run: swift test -c release -Xswiftc -enable-testing
   
   Windows:
-    strategy:
-      matrix:
-        tag: ['5.9.1']
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: sushichop/gha-swift-env@v1
+      - name: Install Swift
+        uses: SwiftyLab/setup-swift@latest
         with:
-          swift-version: ${{ matrix.tag }}
+          swift-version: "6.0.1"
       - run: swift test -c release -Xswiftc -enable-testing

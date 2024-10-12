@@ -129,7 +129,7 @@ public struct Entry: Equatable {
     /// - Parameters:
     ///   - encoding: `String.Encoding`
     public func path(using encoding: String.Encoding) -> String {
-        String(data: centralDirectoryStructure.fileNameData, encoding: encoding) ?? ""
+        String(data: centralDirectoryStructure.fileNameData, encoding: encoding) ?? String(data: centralDirectoryStructure.fileNameData, encoding: .utf8) ?? ""
     }
 
     static let dosLatinUSEncoding = UInt32(0x400)

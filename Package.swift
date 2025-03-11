@@ -16,23 +16,9 @@ import PackageDescription
     ]
 #else
     let targets: [Target] = [
-        .target(
-            name: "CZLib",
-            publicHeadersPath: "include",
-            cSettings: [
-                .define("Z_HAVE_UNISTD_H", .when(platforms: [.macOS, .linux])),
-                .define("HAVE_STDARG_H"),
-                .define("HAVE_HIDDEN"),
-                .define("_LARGEFILE64_SOURCE", to: "1"),
-                .define("_FILE_OFFSET_BITS", to: "64"),
-                .define("_LFS64_LARGEFILE", to: "1"),
-                .define("_CRT_SECURE_NO_DEPRECATE", .when(platforms: [.windows])),
-                .define("_CRT_NONSTDC_NO_DEPRECATE", .when(platforms: [.windows])),
-            ]
-        ),
         .target(name: "ZIPFoundation",
                 dependencies: [
-                    "CZLib",
+                    .product(name: "ZLib", package: "zlib"),
                     .product(name: "SystemPackage", package: "swift-system"),
                     .product(name: "CSProgress", package: "CSProgress"),
                 ]),
@@ -54,7 +40,8 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-system", .upToNextMajor(from: "1.0.0")),
-        .package(url: "https://github.com/gregcotten/CSProgress", .upToNextMajor(from: "0.0.1"))
+        .package(url: "https://github.com/gregcotten/CSProgress", .upToNextMajor(from: "0.0.1")),
+        .package(url: "https://github.com/the-swift-collective/zlib", from: "1.3.1")
     ],
     targets: targets
 )
